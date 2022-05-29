@@ -1,0 +1,54 @@
+<html>
+<head>
+<link rel="stylesheet" href="index.css">
+<style>
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+
+
+</script>
+<script type="text/javascript">
+function otworz()
+{
+window.open("historia.html","_self")
+}
+function otworz1()
+{
+window.open("ksiazka.html","_self")
+}
+function otworz2()
+{
+window.open("kolor.html","_self")
+}
+function otworz4()
+{
+window.open("Pamiet.html","_self")
+}
+</script>
+
+</head>
+<body>
+<div id="all">
+	<div id="top">
+	<h1 id="quizz" style="font-family:URW Chancery L, cursive;">QUIZY I TYLKO TYLE	</h1>
+	<form method="POST" action="zalogowany.php">
+   <input type="email" name="email" placeholder="E-mail" required style="color:#252a3a;">
+   <input type="password" name="password" placeholder="Hasło" required style="color:#252a3a;" >
+   <input type="submit" name="submit" value="Wyślij">
+</form>
+
+<button onclick="otworz4()" width="20%" height="20%">nie pamietasz hasła? </button>
+	</div>
+	<div id="botom" style="float:left;">
+	<p style="float:left; width:100%;">
+	<image type="Image" id="quiz" style="width:10%;height:20%;" src="historia.png " style="cursor:pointer;" onclick="otworz()"/>
+	<image type="Image" id="quiz" style="width:10%;height:20%;" src="ksiazka.png " style="cursor:pointer;" onclick="otworz1()"/>
+	<image type="Image" id="quiz" style="width:10%;height:20%;" src="Jtk2.png " style="cursor:pointer;" onclick="otworz2()"/>
+	</p>
+	<br><br> <div style="float:left;">
+	<p style="font-size:180%;">  Historia          Książki       Kolory</p></div>
+	</div>
+</div>
+</body>
+</html>
