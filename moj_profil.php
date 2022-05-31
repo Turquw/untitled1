@@ -1,25 +1,27 @@
 <?php
 session_start();
-  echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">';
+echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">';
 $conn = new mysqli("localhost","root","","ksiegarnia") or die ("Odpowiedź: Błąd połączenia z serwerem ");
 @$user_password = mysqli_real_escape_string($conn, $_POST["user_password"]);
 @$user_email = mysqli_real_escape_string($conn, $_POST["user_name"]);
 
 $query = mysqli_query($conn, "SELECT * FROM czytelnik WHERE email like '$user_email'");
 if(mysqli_num_rows($query) > 0) {
-  while($row2 = mysqli_fetch_array($query))
-  {$record= $row2['user_passwordhash'];
-    if (password_verify($user_password, $record)) {
-       $_SESSION["current_user"] = $row2['imie'];
-       $_SESSION["id"] = $row2['id_klient'];
+    while($row2 = mysqli_fetch_array($query))
+    {$record= $row2['user_passwordhash'];
+        if (password_verify($user_password, $record)) {
+            $_SESSION["current_user"] = $row2['imie'];
+            $_SESSION["id"] = $row2['id_klient'];
 
+        }
     }
-   }
 
 
 }
+$id=$_SESSION["id"];
+
 if (isset($_SESSION["current_user"])){
-   echo '<!DOCTYPE html>
+    echo '<!DOCTYPE html>
 <!-- saved from url=(0035)http://localhost/YURI/register.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="./register_files/css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -164,6 +166,85 @@ button.menu:hover{color:black;}
 
 
 </div>
+<div style="opacity: 1;position: absolute;
+    top: -25%;
+    left: 20%;
+    width: 200%;
+    height: 70%;
+    padding: 1%;">
+';
+
+
+    $query22 = mysqli_query($conn, "SELECT * FROM czytelnik WHERE id_klient like '$id'");
+    if(mysqli_num_rows($query22) > 0) {
+        while($row22 = mysqli_fetch_array($query22))
+        {
+            $profil= $row22['user_profil'];
+        }
+    }
+
+
+
+    echo '
+<img src="/profilowe/'.$profil.'" alt="xd" style="width: 15%;height: 20%;border-color: darkorange;border-size: 2%;border-style: solid;">
+    <br> <span style="font-size: 20px;">';
+    $query124 = mysqli_query($conn, "SELECT * FROM czytelnik
+where id_klient ='$id'");
+    while($row4444 = mysqli_fetch_array($query124))
+    {echo '<a style="color: darkorange;font-size: 20px;">Rok urodzenia: </a>'.$row4444['rok_urodzenia'].'<br>';
+        echo '<a style="color: darkorange;font-size: 20px;">ulica: </a>'.$row4444['ulica'].'<br>';
+        echo '<a style="color: darkorange;font-size: 20px;">telefon: </a>'.$row4444['numer_telefonu'];
+    }
+
+    echo '
+</span>
+<script>
+function edytuj()
+{
+    window.location.replace("edytuj_profilowe.php");
+}
+</script><br>
+        <button style="width: 20%; height: 10%;" onclick="edytuj()">edytuj profil</button>
+
+
+<a style="position: absolute;left:68%;font-size: 20px;top: 5%;"
+>
+Moje książki do oddania <br>
+<select style="width: 30%;height: 75%;background-color: black;color:white;"size="4">
+';
+
+    $query1 = mysqli_query($conn, "SELECT ksiazka.tytul FROM wypozyczone_i_w_trakcie LEFT JOIN ksiazka on wypozyczone_i_w_trakcie.id_ksiazki=ksiazka.id_ksiazki
+where wypozyczone_i_w_trakcie.id_czytelnika ='$id' and stan=1");
+while($row44 = mysqli_fetch_array($query1))
+{echo '<option style="height: 5%;">'.$row44['tytul'];}
+
+    echo '
+</option>
+</select>
+</a>
+<span  style="width: 40%;height: 75%;position: absolute;top:10%;right: 36%;font-size: 24px;background-color: #0005;">
+';
+$opis4=mysqli_query($conn,"SELECT * FROM `czytelnik` WHERE `id_klient`='$id'");
+while($row222 = mysqli_fetch_array($opis4))
+    {echo $row222['user_opis'];}
+echo '
+</span>
+';
+
+
+
+
+
+    echo '
+<script>
+function  funkcja()
+{
+    window.location.replace("zalogowany.php")
+}
+</script>
+<button style="position: absolute;bottom: 0;left:2%; width: 20%;height: 10%;background-color: black;"onClick="funkcja()">cofnij</button>
+
+</div>
 <script>
 function wypozycz()
 {
@@ -173,16 +254,10 @@ function oddaj()
 {
     window.open("oddaj.php","_self")
 }
-function moj_profil()
-{
-    window.open("moj_profil.php","_self")
-}
 </script>
 
 <span class="v3_21">
-<div style="opacity: 1;position: absolute;top:-50%;left:-56%;"><button class="menu" onclick="wypozycz()">wypożycz</button>
-<button class="menu" style="position: absolute;top: 15%; left:0%;" onclick="oddaj()">oddaj</button>
-<button class="menu" style="position: absolute;top: 30%; left:0%;" onclick="moj_profil()">moj Profil</button>
+
 </div>
 </span></div><style>* {
     box-sizing: border-box;
@@ -352,29 +427,18 @@ a.as:hover{color:darkorange }
     text-align: left;
 }
 .v3_20 {
-    width: 100%;
-    height: 54%;
+    width: 200%;
+    height: 70%;
     background: rgba(0,0,0,1);
     opacity: 0.6;
     position: absolute;
-    top: -20%;
-    left: 64%;
+    top: -25%;
+    left: 20%;
     border: 1px solid rgba(255,255,255,1);
     overflow: hidden;
 
 }
-.v3_21 {
-    width: 572px;
-    color: rgba(255,255,255,1);
-    position: absolute;
-    top: 211px;
-    left: 663px;
-    font-family: Inter;
-    font-weight: Semi Bold Italic;
-    font-size: 48px;
-    opacity: 1;
-    text-align: left;
-}
+
 .v3_22 {
     width: 484px;
     color: rgba(182,182,182,1);
@@ -389,6 +453,6 @@ a.as:hover{color:darkorange }
 }
 </style></body></html>';
 } else {
-echo $_SESSION["current_user"]." Nie Dziala";}
+    echo $_SESSION["current_user"]." Nie Dziala";}
 
- ?>
+?>

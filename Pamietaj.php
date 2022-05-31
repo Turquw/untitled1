@@ -1,16 +1,17 @@
 <?php
-$conn = new mysqli("localhost","root","","quizy") or die ("Odpowiedź: Błąd połączenia z serwerem ");
+$conn = new mysqli("localhost","root","","ksiegarnia") or die ("Odpowiedź: Błąd połączenia z serwerem ");
 
 
 $secret = bin2hex(random_bytes(4));
 $recovery_email = $_POST["recovery_email"];
-$wynik1 = mysqli_query($conn,"SELECT * from users WHERE user_email like '$recovery_email'");
+
+$wynik1 = mysqli_query($conn,"SELECT * from czytelnik WHERE email like '$recovery_email'");
 while($row2 = mysqli_fetch_array($wynik1))
-{$cos2= $row2['user_email'];
-$user_nick=$row2['user_nick'];}
+{$cos2= $row2['email'];
+$user_nick=$row2['imie'];}
 if($cos2==$recovery_email)
 {
-mysqli_query($conn, "UPDATE users SET user_sekret = '$secret' WHERE user_email = '$recovery_email'");
+mysqli_query($conn, "UPDATE czytelnik SET user_sekret = '$secret' WHERE email = '$recovery_email'");
 
 $msg='
 Witaj Przywoływaczu '.$user_nick.'
@@ -58,12 +59,15 @@ $mail = new PHPMailer(true);
 
  $mail->send();
  // Gdy OK:
-echo 'dziala';
+
+echo '<script>alert("sprawdz poczte mój/moja drogi/droga")</script>;';
+echo '<script>window.open("Index.html", "_self")</script>;';
 
 
 
 }
 else {
-  echo 'nie dziala';
+ echo '<script>alert("chyba nie ")</script>;';
+ echo '<script>window.open("register.html", "_self")</script>;';
 }
  ?>

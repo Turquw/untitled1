@@ -1,29 +1,15 @@
 <?php
 session_start();
-  echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">';
+echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">';
 $conn = new mysqli("localhost","root","","ksiegarnia") or die ("Odpowiedź: Błąd połączenia z serwerem ");
-@$user_password = mysqli_real_escape_string($conn, $_POST["user_password"]);
-@$user_email = mysqli_real_escape_string($conn, $_POST["user_name"]);
+$query = mysqli_query($conn, "SELECT ksiazka.tytul FROM wypozyczone_i_w_trakcie LEFT JOIN ksiazka on wypozyczone_i_w_trakcie.id_ksiazki=ksiazka.id_ksiazki
+where wypozyczone_i_w_trakcie.id_czytelnika =$_SESSION[id] and stan=1");
+$query1 = mysqli_query($conn, "SELECT * FROM ksiazka ");
+echo '<!DOCTYPE html>
 
-$query = mysqli_query($conn, "SELECT * FROM czytelnik WHERE email like '$user_email'");
-if(mysqli_num_rows($query) > 0) {
-  while($row2 = mysqli_fetch_array($query))
-  {$record= $row2['user_passwordhash'];
-    if (password_verify($user_password, $record)) {
-       $_SESSION["current_user"] = $row2['imie'];
-       $_SESSION["id"] = $row2['id_klient'];
-
-    }
-   }
-
-
-}
-if (isset($_SESSION["current_user"])){
-   echo '<!DOCTYPE html>
-<!-- saved from url=(0035)http://localhost/YURI/register.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="./register_files/css" rel="stylesheet">
+<html lang="PL"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="./register_files/css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="./register_files/styl.css" rel="stylesheet">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <style>
         body {font-family: Arial, Helvetica, sans-serif;width: 100%;}
@@ -49,8 +35,28 @@ if (isset($_SESSION["current_user"])){
             height: 20%;
         }
 
-        button:hover {
-            opacity: 0.8;
+        button:focus {
+            background-color: darkorange;
+            color: white;
+            background-color: black;
+            color: darkorange;
+        }
+        
+        .button {
+            background-color: darkorange;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            height: 20%;
+            
+        }
+
+        .button:hover {
+            opacity: 0.6;
+            background-color: black;
+            color: darkorange;
         }
 
         /* Extra styles for the cancel button */
@@ -144,47 +150,130 @@ if (isset($_SESSION["current_user"])){
  opacity: 1;
  width: 70%;
  height: 10%;
+ font-weight: bold;
+font-size: 122%;
 }
 button.menu:hover{color:black;}
     </style>
 
 
-
+<script>
+function kot()
+{
+    
+    if(document.getElementById("lista").style.display == "none")
+        {
+            document.getElementById("lista").style.display = "block";
+            document.getElementById("lista1").style.display = "block";
+        }
+    else{
+    document.getElementById("lista").style.display = "none"; 
+    document.getElementById("lista1").style.display = "none"; 
+    }
+    
+}
+</script>
 
 
 
 </head><body><div class="v0_3"><div style="color: white;height: 10%;width: 40%;position: absolute;left: 70%;top:8%; font-size: 35px;">
 
-<a style="color:darkorange;position: absolute;top:0;right: -50%;">'.$_SESSION["current_user"].'</a>
+<a name="ccos" id="ccos" onclick="kot()" style="color:darkorange;position: absolute;top:0;right: -50%;cursor: pointer;">' .$_SESSION["current_user"]. '</a>
+
+<div id="lista" style="display:none;background-color: darkorange;color:black;border-radius:3%;border-color: darkorange;border-style: solid;height: 40%;width: 30%;font-size: 20px;position: absolute;bottom: 0;right: 24.7%;"  >Mój Profil</div>
 
 
 
 
-</div><div class="v2_2"></div><div class="name"></div><div class="v3_12"></div><div class="v3_13"><div class="v2_4"></div><span class="v2_5">Księg</span><span class="v2_7">arnia</span></div><div class="v3_15"></div><span class="v3_19"><div class="v3_20">
+</div><div class="v2_2"></div><div class="name">
+
+</div>
+<div class="v3_122" ></div>
+<div class="v3_12" >
+
+<script>
+function  wyloguj()
+{
+    window.location.replace(kill_baby.php);
+}
+</script>
+<div id="lista1" style="display:none;background-color: #f44336;position: absolute;top:0;right:0%;height: 3%;width: 15%;font-size: 20px;cursor: pointer;" ><a onclick="Wyloguj()">wyloguj sie</a></div>
+
+<div class="v3_20">
 
 
 </div>
+<div style="opacity: 1;    width: 66%;
+    height: 59%;
+    
+    
+    position: absolute;
+    top: 8%;
+    left: 18%;
+    color:white;
+    padding: 2%;">';
+$i=0;
+while($row1 = mysqli_fetch_array($query1))
+{$row1['tytul'];
+    $i++;
+}
+echo'
+    <a class="menu" style="color:darkorange;"> wybierz ksiazki które chcesz oddac</a><br>
+    <form style="height: 50%;" action="oddaj_d.php" method="post">
+    <select name="nazwa[]" id="nazwa"style="width: 40%;height: 100%;background-color: black;color:white;" multiple size="'.$i.'">';
+while($row = mysqli_fetch_array($query))
+{echo '<option style="height: 5%;">'.$row['tytul'];}
+echo '</option>
+
+	
+</select>
+<br>
 <script>
-function wypozycz()
-{
-    window.open("wypozycz.php","_self")
+function myFunction() {
+    document.getElementById("demo").innerHTML="";
+var el = document.getElementById("nazwa"),
+    options = [];
+var ko="";
+options2 = [];
+    var c=0
+for (var i = 0, length = el.options.length; i < length; ++i) {
+    options[i] = el.options[i].selected;
+   if(options[i]!==false)
+       {
+           if(c>9)
+               {
+                   stop();
+               }
+           else{
+         document.getElementById("demo").innerHTML+=el.options[i].value; 
+         document.getElementById("demo").innerHTML+="\n";
+        
+          
+         c++;}
+       }
+;
 }
-function oddaj()
-{
-    window.open("oddaj.php","_self")
+
+
 }
-function moj_profil()
+function  funkcja()
 {
-    window.open("moj_profil.php","_self")
+    window.location.replace("zalogowany.php")
 }
 </script>
 
-<span class="v3_21">
-<div style="opacity: 1;position: absolute;top:-50%;left:-56%;"><button class="menu" onclick="wypozycz()">wypożycz</button>
-<button class="menu" style="position: absolute;top: 15%; left:0%;" onclick="oddaj()">oddaj</button>
-<button class="menu" style="position: absolute;top: 30%; left:0%;" onclick="moj_profil()">moj Profil</button>
+
+<input type="submit" class="submit" value="TAK !">
+</form>
+<button  style="width: 40%;height: 20%;" onclick="myFunction()">chce oodac</button>
+<a  class="menu" style="text-align: left;position: absolute;top: 6.2%;right: 15%;width: 40%;color:darkorange;">A wienc chcesz oddac nam : </a>
+ <a class="menu" id="demo" style="text-align: left;position: absolute;top: 10.2%;right: 15%;width: 40%; height: 40%;white-space:pre-wrap; word-wrap:break-word;"></a>
 </div>
-</span></div><style>* {
+<button style="position: absolute;bottom: 35%;left:20%; width: 10%;height: 5%;background-color: black;"onClick="funkcja()">cofnij</button>
+</div><div class="v3_13"><div class="v2_4"></div><span class="v2_5">Księg</span><span class="v2_7">arnia</span></div>
+
+
+</div><style>* {
     box-sizing: border-box;
     margin:0;
     width: 100%;
@@ -192,6 +281,16 @@ function moj_profil()
 }
 body {
     font-size: 14px;
+}
+.submit{
+    width: 40%;
+    height: 18.3%;
+    position: absolute;
+    right: 15%;
+    top: 56.2%;
+    background-color: darkorange;
+    color: white;
+    border: 0;
 }
 .v0_3 {
     width: 100%;
@@ -226,16 +325,27 @@ a.as:hover{color:darkorange }
 .v3_12 {
     width: 100%;
     height: 760px;
-    background-image: url("tło-modified.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
+   
+   
     position: absolute;
     top: 18%;
     left: 43px;
     overflow: hidden;
-    opacity: 0.5;
+   
+}
+.v3_122{
+    width: 100%;
+    height: 760px;
+    background-image: url("tło-modified.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+   opacity: 0.5;
+    position: absolute;
+    top: 18%;
+    left: 43px;
+    overflow: hidden;
+   
 }
 .v3_13 {
     width: 537px;
@@ -271,7 +381,7 @@ a.as:hover{color:darkorange }
     top: 0px;
     left: 0px;
     font-family: Inter;
-    font-weight: Extra Bold Italic;
+    
     font-size: 94px;
     opacity: 1;
     text-align: left;
@@ -283,7 +393,7 @@ a.as:hover{color:darkorange }
     top: 0px;
     left: 248px;
     font-family: Inter;
-    font-weight: Semi Bold Italic;
+    
     font-size: 96px;
     opacity: 1;
     text-align: left;
@@ -322,7 +432,7 @@ a.as:hover{color:darkorange }
     top: 10px;
     left: 0px;
     font-family: Inter;
-    font-weight: Extra Bold Italic;
+   
     font-size: 64px;
     opacity: 1;
     text-align: left;
@@ -334,7 +444,7 @@ a.as:hover{color:darkorange }
     top: 10px;
     left: 168px;
     font-family: Inter;
-    font-weight: Extra Bold Italic;
+    
     font-size: 64px;
     opacity: 1;
     text-align: left;
@@ -346,19 +456,19 @@ a.as:hover{color:darkorange }
     top: 304px;
     left: 76px;
     font-family: Inter;
-    font-weight: Extra Bold Italic;
+    
     font-size: 49px;
     opacity: 1;
     text-align: left;
 }
 .v3_20 {
-    width: 100%;
-    height: 54%;
-    background: rgba(0,0,0,1);
+    width: 59%;
+    height: 59%;
+    background: rgba(0,0,0);
     opacity: 0.6;
     position: absolute;
-    top: -20%;
-    left: 64%;
+    top: 8%;
+    left: 18%;
     border: 1px solid rgba(255,255,255,1);
     overflow: hidden;
 
@@ -370,7 +480,7 @@ a.as:hover{color:darkorange }
     top: 211px;
     left: 663px;
     font-family: Inter;
-    font-weight: Semi Bold Italic;
+    
     font-size: 48px;
     opacity: 1;
     text-align: left;
@@ -382,13 +492,12 @@ a.as:hover{color:darkorange }
     top: 277px;
     left: 664px;
     font-family: Inter;
-    font-weight: Semi Bold Italic;
+    
     font-size: 32px;
     opacity: 1;
     text-align: left;
 }
 </style></body></html>';
-} else {
-echo $_SESSION["current_user"]." Nie Dziala";}
 
- ?>
+
+?>
