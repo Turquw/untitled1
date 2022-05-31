@@ -265,8 +265,8 @@ where id_klient ='$id'");
     if (isset($_POST['miasto'])){
         $imie=$_POST['miasto'];
         mysqli_query($conn,"UPDATE `czytelnik` SET `miasto`='$imie'");}
-    if (isset($_POST['telefon'])){
-        $imie=$_POST['telefon'];
+    if (isset($_POST['numer_telefonu'])){
+        $imie=$_POST['numer_telefonu'];
         mysqli_query($conn,"UPDATE `czytelnik` SET `numer_telefonu`='$imie'");}
     if (isset($_POST['ulica'])){
         $imie=$_POST['ulica'];

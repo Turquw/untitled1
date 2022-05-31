@@ -192,12 +192,12 @@ function kot()
 <div class="v3_12" >
 
 <script>
-function  wyloguj()
+function  Wyloguj()
 {
-    window.location.replace(kill_baby.php);
+    window.location.replace("kill_bayby.php");
 }
 </script>
-<div id="lista1" style="display:none;background-color: #f44336;position: absolute;top:0;right:0%;height: 3%;width: 15%;font-size: 20px;cursor: pointer;" ><a onclick="Wyloguj()">wyloguj sie</a></div>
+<div id="lista1" style="display:none;background-color: #f44336;position: absolute;top:0;right:0%;height: 3%;width: 15%;font-size: 20px;" ><button onclick="Wyloguj()">wyloguj sie</button></div>
 
 <div class="v3_20">
 

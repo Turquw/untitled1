@@ -9,6 +9,7 @@ $conn = new mysqli("localhost","root","","ksiegarnia") or die ("Odpowiedź: Bł�
 $user_nick = mysqli_real_escape_string($conn, $_POST["user_nick"]);
 $user_nick2 = mysqli_real_escape_string($conn, $_POST["user_nick2"]);
 $user_email = mysqli_real_escape_string($conn, $_POST["email"]);
+$rok = mysqli_real_escape_string($conn, $_POST["rok"]);
 $user_password = mysqli_real_escape_string($conn, $_POST["password"]);
 $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
 mysqli_select_db($conn, "ksiegarnia") or die("Trwa konserwacja bazy danych… Odśwież stronę za kilka sekund.");
@@ -430,10 +431,10 @@ a.as:hover{color:darkorange }
 }
 
 else{
-mysqli_query($conn, "INSERT INTO czytelnik (imie, nazwisko, email,user_passwordhash) VALUES ('$user_nick','$user_nick2','$user_email', '$user_password_hash')");
+mysqli_query($conn, "INSERT INTO czytelnik (imie, nazwisko, email,user_passwordhash,rok_urodzenia) VALUES ('$user_nick','$user_nick2','$user_email', '$user_password_hash','$rok')");
 
-echo  '<script>alert($cos2." ".$user_email);
- window.location.href =register.php;
+echo  '<script>alert("zarejestrowano pomyslnie");
+ window.location.replace("register.html");
 </script>';
 }
 
