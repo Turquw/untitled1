@@ -13,9 +13,7 @@ $data=date('Y-m-d');
         $row1 = mysqli_fetch_array($query);
 
         $idk=$row1['id_ksiazki'];
-        $ilosc=$row1['ilosc'];
-            $ilosc--;
-            mysqli_query($conn, "UPDATE `ksiazka` SET `ilosc`=$ilosc WHERE `id_ksiazki`=$idk");
+
         mysqli_query($conn, "INSERT INTO `wypozyczone_i_w_trakcie`(`stan`, `id_ksiazki`, `id_czytelnika`) VALUES (1,$idk,$klient)");}}
         echo '<script>
 alert ("podejdz do punktu i odbierz ksiazki");

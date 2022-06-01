@@ -174,8 +174,10 @@ button.menu:hover{color:black;}
 
 <div style="opacity: 1;    width: 66%;
     height: 59%;
+    border-style: solid;
     
-    
+    border-color: #fff5;
+    background-color: #0005;
     position: absolute;
     top: 8%;
     left: 18%;

@@ -9,7 +9,8 @@ $wynik1 = mysqli_query($conn,"SELECT * from czytelnik WHERE email like '$recover
 while($row2 = mysqli_fetch_array($wynik1))
 {$cos2= $row2['email'];
 $user_nick=$row2['imie'];}
-if($cos2==$recovery_email)
+echo $cos2;
+if($cos2===$recovery_email)
 {
 mysqli_query($conn, "UPDATE czytelnik SET user_sekret = '$secret' WHERE email = '$recovery_email'");
 
@@ -68,6 +69,6 @@ echo '<script>window.open("Index.html", "_self")</script>;';
 }
 else {
  echo '<script>alert("chyba nie ")</script>;';
- echo '<script>window.open("register.html", "_self")</script>;';
+ //echo '<script>window.open("register.html", "_self")</script>;';
 }
  ?>

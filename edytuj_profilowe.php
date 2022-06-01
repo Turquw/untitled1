@@ -212,9 +212,15 @@ where id_klient ='$id'");
         echo '<textarea name="tekst" style="width: 120%;height: 100%;position: absolute;right: -20%;display: block; color:white;background-color: #0005;"">'.$row222['user_opis'].'</textarea>';
     }echo '
 </span>
+    <script>
+    function  odswiesz()
+    {
+     alert("prosze odświerzyc strone a dane sie pojawia :D");
+    }
+    
+</script>
 
-
-         <input  style="height: 5%;width: 57%; position: absolute;bottom: 15%;background-color: darkorange;color: black;" type="submit" value="zapisz zmiany"/>
+         <input  style="height: 5%;width: 57%; position: absolute;bottom: 15%;background-color: darkorange;color: black;" type="submit" value="zapisz zmiany" onclick="odswiesz()"/>
             <input type="file" class="custom-file-input"  name="image[]" style="position: absolute;top:22%;width: 20%;height: 5%;" >
 </form>
 
@@ -255,28 +261,28 @@ where id_klient ='$id'");
     }
     if (isset($_POST['imie'])){
         $imie=$_POST['imie'];
-    mysqli_query($conn,"UPDATE `czytelnik` SET `imie`='$imie'");}
+    mysqli_query($conn,"UPDATE `czytelnik` SET `imie`='$imie' where id_klient='$id'");}
     if (isset($_POST['nazwisko'])){
         $imie=$_POST['nazwisko'];
-        mysqli_query($conn,"UPDATE `czytelnik` SET `nazwisko`='$imie'");}
+        mysqli_query($conn,"UPDATE `czytelnik` SET `nazwisko`='$imie' where id_klient='$id'");}
     if (isset($_POST['email'])){
         $imie=$_POST['email'];
-        mysqli_query($conn,"UPDATE `czytelnik` SET `email`='$imie'");}
+        mysqli_query($conn,"UPDATE `czytelnik` SET `email`='$imie' where id_klient='$id'");}
     if (isset($_POST['miasto'])){
         $imie=$_POST['miasto'];
-        mysqli_query($conn,"UPDATE `czytelnik` SET `miasto`='$imie'");}
+        mysqli_query($conn,"UPDATE `czytelnik` SET `miasto`='$imie' where id_klient='$id'");}
     if (isset($_POST['numer_telefonu'])){
         $imie=$_POST['numer_telefonu'];
-        mysqli_query($conn,"UPDATE `czytelnik` SET `numer_telefonu`='$imie'");}
+        mysqli_query($conn,"UPDATE `czytelnik` SET `numer_telefonu`='$imie' where id_klient='$id'");}
     if (isset($_POST['ulica'])){
         $imie=$_POST['ulica'];
-        mysqli_query($conn,"UPDATE `czytelnik` SET `ulica`='$imie'");}
+        mysqli_query($conn,"UPDATE `czytelnik` SET `ulica`='$imie' where id_klient='$id'");}
     if (isset($_POST['kraj'])){
         $imie=$_POST['kraj'];
-        mysqli_query($conn,"UPDATE `czytelnik` SET `kraj`='$imie'");}
+        mysqli_query($conn,"UPDATE `czytelnik` SET `kraj`='$imie' where id_klient='$id'");}
     if (isset($_POST['tekst'])){
         $imie=$_POST['tekst'];
-        mysqli_query($conn,"UPDATE `czytelnik` SET `user_opis`='$imie'");}
+        mysqli_query($conn,"UPDATE `czytelnik` SET `user_opis`='$imie' where id_klient='$id'");}
 
 
 
@@ -284,14 +290,16 @@ where id_klient ='$id'");
 
 
     echo '<script>
-function  funkcja()
-{
-    window.location.replace("moj_profil.php")
-}
+  function funkcja()
+  {
+      window.location.replace("moj_profil.php");
+  }
+
 </script>
 <button style="position: absolute;bottom: 0;left:2%; width: 10%;height: 10%;background-color: black;"onClick="funkcja()">cofnij</button>
 </div>
 <script>
+
 function wypozycz()
 {
     window.open("wypozycz.php","_self")

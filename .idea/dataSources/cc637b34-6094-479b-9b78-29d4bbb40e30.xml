@@ -1202,7 +1202,7 @@
       <Position>1</Position>
     </argument>
     <column id="351" parent="338" name="id_klient">
-      <AutoIncrement>402</AutoIncrement>
+      <AutoIncrement>406</AutoIncrement>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1220,7 +1220,7 @@
       <Position>4</Position>
     </column>
     <column id="355" parent="338" name="email">
-      <DataType>varchar(20)|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
       <Position>5</Position>
     </column>
     <column id="356" parent="338" name="rok_urodzenia">
@@ -1400,229 +1400,239 @@
       <NotNull>1</NotNull>
       <Position>9</Position>
     </column>
-    <foreign-key id="394" parent="341" name="wyp_FK">
+    <column id="394" parent="341" name="email">
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>10</Position>
+    </column>
+    <column id="395" parent="341" name="user_passwordhash">
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>11</Position>
+    </column>
+    <foreign-key id="396" parent="341" name="wyp_FK">
       <ColNames>id_wypozyczalni_FK</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>id_wypozyczalni</RefColNames>
       <RefTableName>wypozyczalnia</RefTableName>
     </foreign-key>
-    <foreign-key id="395" parent="341" name="dlugosc">
+    <foreign-key id="397" parent="341" name="dlugosc">
       <ColNames>ID_Dlugosc</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>ID_DlugoscPK</RefColNames>
       <RefTableName>dlugosc</RefTableName>
     </foreign-key>
-    <foreign-key id="396" parent="341" name="zatrudnieniefk">
+    <foreign-key id="398" parent="341" name="zatrudnieniefk">
       <ColNames>id_zatrudnienia</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>id_zat</RefColNames>
       <RefTableName>zatrudnienia</RefTableName>
     </foreign-key>
-    <index id="397" parent="341" name="wyp_FK">
+    <index id="399" parent="341" name="wyp_FK">
       <ColNames>id_wypozyczalni_FK</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="398" parent="341" name="dlugosc">
+    <index id="400" parent="341" name="dlugosc">
       <ColNames>ID_Dlugosc</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="399" parent="341" name="zatrudnieniefk">
+    <index id="401" parent="341" name="zatrudnieniefk">
       <ColNames>id_zatrudnienia</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="400" parent="341" name="PRIMARY">
+    <key id="402" parent="341" name="PRIMARY">
       <ColNames>id_Pracownika</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="401" parent="342" name="id_ksiazki">
+    <column id="403" parent="342" name="id_ksiazki">
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="402" parent="342" name="tytul">
+    <column id="404" parent="342" name="tytul">
       <DataType>varchar(40)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="403" parent="342" name="autor">
+    <column id="405" parent="342" name="autor">
       <DataType>varchar(40)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="404" parent="342" name="kategoria">
+    <column id="406" parent="342" name="kategoria">
       <DataType>varchar(20)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="405" parent="342" name="data_wypozyczenia">
+    <column id="407" parent="342" name="data_wypozyczenia">
       <DataType>date|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="406" parent="343" name="id_wydawnictwa">
+    <column id="408" parent="343" name="id_wydawnictwa">
       <AutoIncrement>52</AutoIncrement>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="407" parent="343" name="nazwa">
+    <column id="409" parent="343" name="nazwa">
       <DataType>varchar(20)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="408" parent="343" name="ulica">
+    <column id="410" parent="343" name="ulica">
       <DataType>varchar(20)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="409" parent="343" name="miasto">
+    <column id="411" parent="343" name="miasto">
       <DataType>varchar(20)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="410" parent="343" name="kraj">
+    <column id="412" parent="343" name="kraj">
       <DataType>varchar(20)|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="411" parent="343" name="telefon">
+    <column id="413" parent="343" name="telefon">
       <DataType>int(23)|0s</DataType>
       <Position>6</Position>
     </column>
-    <key id="412" parent="343" name="PRIMARY">
+    <key id="414" parent="343" name="PRIMARY">
       <ColNames>id_wydawnictwa</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="413" parent="344" name="id_wypozyczalni">
+    <column id="415" parent="344" name="id_wypozyczalni">
       <AutoIncrement>60</AutoIncrement>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="414" parent="344" name="miasto">
+    <column id="416" parent="344" name="miasto">
       <DataType>varchar(20)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="415" parent="344" name="ulica">
+    <column id="417" parent="344" name="ulica">
       <DataType>varchar(20)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="416" parent="344" name="telefon">
+    <column id="418" parent="344" name="telefon">
       <DataType>int(23)|0s</DataType>
       <Position>4</Position>
     </column>
-    <key id="417" parent="344" name="PRIMARY">
+    <key id="419" parent="344" name="PRIMARY">
       <ColNames>id_wypozyczalni</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="418" parent="345" name="id">
+    <column id="420" parent="345" name="id">
       <AutoIncrement>43</AutoIncrement>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="419" parent="345" name="stan">
+    <column id="421" parent="345" name="stan">
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="420" parent="345" name="id_ksiazki">
+    <column id="422" parent="345" name="id_ksiazki">
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="421" parent="345" name="id_czytelnika">
+    <column id="423" parent="345" name="id_czytelnika">
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="422" parent="345" name="data wypozyczenia">
+    <column id="424" parent="345" name="data wypozyczenia">
       <DataType>date|0s</DataType>
       <DefaultExpression>current_timestamp()</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <key id="423" parent="345" name="PRIMARY">
+    <key id="425" parent="345" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="424" parent="346" name="id_zat">
+    <column id="426" parent="346" name="id_zat">
       <AutoIncrement>5</AutoIncrement>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="425" parent="346" name="nazwa">
+    <column id="427" parent="346" name="nazwa">
       <DataType>varchar(20)|0s</DataType>
       <Position>2</Position>
     </column>
-    <key id="426" parent="346" name="PRIMARY">
+    <key id="428" parent="346" name="PRIMARY">
       <ColNames>id_zat</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="427" parent="347" name="tytul">
+    <column id="429" parent="347" name="tytul">
       <DataType>varchar(40)|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="428" parent="347" name="autor">
+    <column id="430" parent="347" name="autor">
       <DataType>varchar(40)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="429" parent="347" name="nazwa">
+    <column id="431" parent="347" name="nazwa">
       <DataType>varchar(20)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="430" parent="348" name="id_ksiazki">
+    <column id="432" parent="348" name="id_ksiazki">
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="431" parent="348" name="tytul">
+    <column id="433" parent="348" name="tytul">
       <DataType>varchar(40)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="432" parent="348" name="autor">
+    <column id="434" parent="348" name="autor">
       <DataType>varchar(40)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="433" parent="348" name="ilosc">
+    <column id="435" parent="348" name="ilosc">
       <DataType>int(4)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="434" parent="348" name="imie">
+    <column id="436" parent="348" name="imie">
       <DataType>varchar(20)|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="435" parent="348" name="nazwisko">
+    <column id="437" parent="348" name="nazwisko">
       <DataType>varchar(20)|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="436" parent="348" name="id_ksiazki_FK">
+    <column id="438" parent="348" name="id_ksiazki_FK">
       <DataType>int(11)|0s</DataType>
       <Position>7</Position>
     </column>
-    <column id="437" parent="349" name="id_wypozyczalni_FK">
+    <column id="439" parent="349" name="id_wypozyczalni_FK">
       <DataType>int(11)|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="438" parent="349" name="imie">
+    <column id="440" parent="349" name="imie">
       <DataType>varchar(20)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="439" parent="349" name="nazwisko">
+    <column id="441" parent="349" name="nazwisko">
       <DataType>varchar(20)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="440" parent="349" name="id_wypozyczalni">
+    <column id="442" parent="349" name="id_wypozyczalni">
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="441" parent="349" name="miasto">
+    <column id="443" parent="349" name="miasto">
       <DataType>varchar(20)|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="442" parent="349" name="ulica">
+    <column id="444" parent="349" name="ulica">
       <DataType>varchar(20)|0s</DataType>
       <Position>6</Position>
     </column>

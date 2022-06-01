@@ -2,8 +2,7 @@
 session_start();
 echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">';
 $conn = new mysqli("localhost","root","","ksiegarnia") or die ("Odpowiedź: Błąd połączenia z serwerem ");
-$query = mysqli_query($conn, "SELECT ksiazka.tytul FROM wypozyczone_i_w_trakcie LEFT JOIN ksiazka on wypozyczone_i_w_trakcie.id_ksiazki=ksiazka.id_ksiazki
-where wypozyczone_i_w_trakcie.id_czytelnika =$_SESSION[id] and stan=2");
+$query = mysqli_query($conn, "SELECT ksiazka.tytul,czytelnik.imie,czytelnik.nazwisko,czytelnik.id_klient from ksiazka LEFT join wypozyczone_i_w_trakcie ON ksiazka.id_ksiazki=wypozyczone_i_w_trakcie.id_ksiazki LEFT join czytelnik on wypozyczone_i_w_trakcie.id_czytelnika=czytelnik.id_klient WHERE wypozyczone_i_w_trakcie.stan=0");
 $query1 = mysqli_query($conn, "SELECT * FROM ksiazka ");
 echo '<!DOCTYPE html>
 
@@ -218,57 +217,49 @@ while($row1 = mysqli_fetch_array($query1))
     $i++;
 }
 echo'
-    <a class="menu" style="color:darkorange;"> wybierz ksiazki które chcesz oddac</a><br>
-    <form style="height: 50%;" action="oddaj_d.php" method="post">
+    <a class="menu" style="color:darkorange;"> Przymij ksiazke od danego uzytkownia</a><br>
+    <form style="height: 50%;" action="biblio_p.php" method="post">
     <select name="nazwa[]" id="nazwa"style="width: 40%;height: 100%;background-color: black;color:white;" multiple size="'.$i.'">';
 while($row = mysqli_fetch_array($query))
-{echo '<option style="height: 5%;">'.$row['tytul'];}
+{echo '<option style="height: 5%;">'.$row['tytul'].';'.$row['imie'].';'.$row['nazwisko'].';'.$row['id_klient'];}
 echo '</option>
 
 	
 </select>
 <br>
+
+
+
+<input style="position: absolute;left: 3%; width: 38%;" type="submit" class="submit" value="oddał ksiazke">
+</form>
+
+<a  class="menu" style="text-align: left;position: absolute;top: 6.2%;right: 15%;width: 40%;color:darkorange;">Daj czytelnikowi : </a>
+ <a class="menu" id="demo" style="text-align: left;position: absolute;top: -3%;left:40%;width: 100%; height: 50%;white-space:pre-wrap; word-wrap:break-word;"> 
+ <form style="height: 100%;width: 100%;" action="biblio_d.php" method="post">
+    <select name="nazwa[]" id="nazwa"style="width: 40%;height: 89%;background-color: black;color:white;" multiple size="'.$i.'">';
+$query1212 = mysqli_query($conn, "SELECT ksiazka.tytul,czytelnik.imie,czytelnik.nazwisko,czytelnik.id_klient from ksiazka LEFT join wypozyczone_i_w_trakcie ON ksiazka.id_ksiazki=wypozyczone_i_w_trakcie.id_ksiazki LEFT join czytelnik on wypozyczone_i_w_trakcie.id_czytelnika=czytelnik.id_klient WHERE wypozyczone_i_w_trakcie.stan=1");
+
+while($row = mysqli_fetch_array($query1212))
+{echo '<option style="height: 5%;">'.$row['tytul'].';'.$row['imie'].';'.$row['nazwisko'].';'.$row['id_klient'];}
+echo '</option>
+
+	
+</select>
+<br>
+
+
+
+<input style="position: absolute;left: 2%;top: 119%; width: 40%;height: 36%;" type="submit" class="submit" value="daj urzytkownikowi">
+</form>
+ 
+ </a>
+</div>
 <script>
-function myFunction() {
-    document.getElementById("demo").innerHTML="";
-var el = document.getElementById("nazwa"),
-    options = [];
-var ko="";
-options2 = [];
-    var c=0
-for (var i = 0, length = el.options.length; i < length; ++i) {
-    options[i] = el.options[i].selected;
-   if(options[i]!==false)
-       {
-           if(c>9)
-               {
-                   stop();
-               }
-           else{
-         document.getElementById("demo").innerHTML+=el.options[i].value; 
-         document.getElementById("demo").innerHTML+="\n";
-        
-          
-         c++;}
-       }
-;
-}
-
-
-}
 function  funkcja()
 {
-    window.location.replace("zalogowany.php")
+    window.location.replace("admin.php");
 }
 </script>
-
-
-<input type="submit" class="submit" value="TAK !">
-</form>
-<button  style="width: 40%;height: 20%;" onclick="myFunction()">chce oodac</button>
-<a  class="menu" style="text-align: left;position: absolute;top: 6.2%;right: 15%;width: 40%;color:darkorange;">A wienc chcesz oddac nam : </a>
- <a class="menu" id="demo" style="text-align: left;position: absolute;top: 10.2%;right: 15%;width: 40%; height: 40%;white-space:pre-wrap; word-wrap:break-word;"></a>
-</div>
 <button style="position: absolute;bottom: 35%;left:20%; width: 10%;height: 5%;background-color: black;"onClick="funkcja()">cofnij</button>
 </div><div class="v3_13"><div class="v2_4"></div><span class="v2_5">Księg</span><span class="v2_7">arnia</span></div>
 

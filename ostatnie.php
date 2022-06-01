@@ -1,15 +1,11 @@
 <?php
 session_start();
-echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">';
-$conn = new mysqli("localhost","root","","ksiegarnia") or die ("Odpowiedź: Błąd połączenia z serwerem ");
-$query = mysqli_query($conn, "SELECT ksiazka.tytul FROM wypozyczone_i_w_trakcie LEFT JOIN ksiazka on wypozyczone_i_w_trakcie.id_ksiazki=ksiazka.id_ksiazki
-where wypozyczone_i_w_trakcie.id_czytelnika =$_SESSION[id] and stan=2");
-$query1 = mysqli_query($conn, "SELECT * FROM ksiazka ");
-echo '<!DOCTYPE html>
-
-<html lang="PL"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="./register_files/css" rel="stylesheet">
+echo '
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://localhost/YURI/register.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="./register_files/css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 
     <style>
         body {font-family: Arial, Helvetica, sans-serif;width: 100%;}
@@ -35,28 +31,8 @@ echo '<!DOCTYPE html>
             height: 20%;
         }
 
-        button:focus {
-            background-color: darkorange;
-            color: white;
-            background-color: black;
-            color: darkorange;
-        }
-        
-        .button {
-            background-color: darkorange;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            height: 20%;
-            
-        }
-
-        .button:hover {
-            opacity: 0.6;
-            background-color: black;
-            color: darkorange;
+        button:hover {
+            opacity: 0.8;
         }
 
         /* Extra styles for the cancel button */
@@ -145,135 +121,25 @@ echo '<!DOCTYPE html>
 
             }
         }
-        .menu
-{
- opacity: 1;
- width: 70%;
- height: 10%;
- font-weight: bold;
-font-size: 122%;
-}
-button.menu:hover{color:black;}
     </style>
 
 
-<script>
-function kot()
-{
-    
-    if(document.getElementById("lista").style.display == "none")
-        {
-            document.getElementById("lista").style.display = "block";
-            document.getElementById("lista1").style.display = "block";
-        }
-    else{
-    document.getElementById("lista").style.display = "none"; 
-    document.getElementById("lista1").style.display = "none"; 
-    }
-    
-}
-</script>
-
-
-
-</head><body><div class="v0_3"><div style="color: white;height: 10%;width: 40%;position: absolute;left: 70%;top:8%; font-size: 35px;">
-
-<a name="ccos" id="ccos" onclick="kot()" style="color:darkorange;position: absolute;top:0;right: -50%;cursor: pointer;">' .$_SESSION["current_user"]. '</a>
-
-<div id="lista" style="display:none;background-color: darkorange;color:black;border-radius:3%;border-color: darkorange;border-style: solid;height: 40%;width: 30%;font-size: 20px;position: absolute;bottom: 0;right: 24.7%;"  >Mój Profil</div>
 
 
 
 
-</div><div class="v2_2"></div><div class="name">
+</head><body><div class="v0_3"><div style="color: white;height: 10%;width: 40%;position: absolute;left: 70%;top:8%; font-size: 35px">
 
-</div>
-<div class="v3_122" ></div>
-<div class="v3_12" >
-
-<script>
-function  Wyloguj()
-{
-    window.location.replace("kill_bayby.php");
-}
-</script>
-<div id="lista1" style="display:none;background-color: #f44336;position: absolute;top:0;right:0%;height: 3%;width: 15%;font-size: 20px;" ><button onclick="Wyloguj()">wyloguj sie</button></div>
-
-<div class="v3_20">
+    <a style="color:darkorange;position: absolute;top:0;right: -50%;">'.$_SESSION["current_user"].'</a>
 
 
-</div>
-<div style="opacity: 1;    width: 66%;
-    height: 59%;
-    
-    
-    position: absolute;
-    top: 8%;
-    left: 18%;
-    color:white;
-    padding: 2%;">';
-$i=0;
-while($row1 = mysqli_fetch_array($query1))
-{$row1['tytul'];
-    $i++;
-}
-echo'
-    <a class="menu" style="color:darkorange;"> wybierz ksiazki które chcesz oddac</a><br>
-    <form style="height: 50%;" action="oddaj_d.php" method="post">
-    <select name="nazwa[]" id="nazwa"style="width: 40%;height: 100%;background-color: black;color:white;" multiple size="'.$i.'">';
-while($row = mysqli_fetch_array($query))
-{echo '<option style="height: 5%;">'.$row['tytul'];}
-echo '</option>
-
-	
-</select>
-<br>
-<script>
-function myFunction() {
-    document.getElementById("demo").innerHTML="";
-var el = document.getElementById("nazwa"),
-    options = [];
-var ko="";
-options2 = [];
-    var c=0
-for (var i = 0, length = el.options.length; i < length; ++i) {
-    options[i] = el.options[i].selected;
-   if(options[i]!==false)
-       {
-           if(c>9)
-               {
-                   stop();
-               }
-           else{
-         document.getElementById("demo").innerHTML+=el.options[i].value; 
-         document.getElementById("demo").innerHTML+="\n";
-        
-          
-         c++;}
-       }
-;
-}
 
 
-}
-function  funkcja()
-{
-    window.location.replace("zalogowany.php")
-}
-</script>
-
-
-<input type="submit" class="submit" value="TAK !">
+</div><div class="v2_2"></div><div class="name"></div><div class="v3_12"></div><div class="v3_13"><div class="v2_4"></div><span class="v2_5">Księg</span><span class="v2_7">arnia</span></div><div class="v3_15"></div><span class="v3_19"><div class="v3_20"></div><span class="v3_21">
+<form action="ostatnie_d.php" method="post" style="width: 50%">
+<input type="number">
 </form>
-<button  style="width: 40%;height: 20%;" onclick="myFunction()">chce oodac</button>
-<a  class="menu" style="text-align: left;position: absolute;top: 6.2%;right: 15%;width: 40%;color:darkorange;">A wienc chcesz oddac nam : </a>
- <a class="menu" id="demo" style="text-align: left;position: absolute;top: 10.2%;right: 15%;width: 40%; height: 40%;white-space:pre-wrap; word-wrap:break-word;"></a>
-</div>
-<button style="position: absolute;bottom: 35%;left:20%; width: 10%;height: 5%;background-color: black;"onClick="funkcja()">cofnij</button>
-</div><div class="v3_13"><div class="v2_4"></div><span class="v2_5">Księg</span><span class="v2_7">arnia</span></div>
-
-
-</div><style>* {
+</span></div><style>* {
     box-sizing: border-box;
     margin:0;
     width: 100%;
@@ -281,16 +147,6 @@ function  funkcja()
 }
 body {
     font-size: 14px;
-}
-.submit{
-    width: 40%;
-    height: 18.3%;
-    position: absolute;
-    right: 15%;
-    top: 56.2%;
-    background-color: darkorange;
-    color: white;
-    border: 0;
 }
 .v0_3 {
     width: 100%;
@@ -321,31 +177,19 @@ a.as:hover{color:darkorange }
 .name {
     color: #fff;
 }
-
 .v3_12 {
-    width: 100%;
-    height: 760px;
-   
-   
-    position: absolute;
-    top: 18%;
-    left: 43px;
-    overflow: hidden;
-   
-}
-.v3_122{
     width: 100%;
     height: 760px;
     background-image: url("tło-modified.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-   opacity: 0.5;
+    opacity: 1;
     position: absolute;
     top: 18%;
     left: 43px;
     overflow: hidden;
-   
+    opacity: 0.5;
 }
 .v3_13 {
     width: 537px;
@@ -381,7 +225,7 @@ a.as:hover{color:darkorange }
     top: 0px;
     left: 0px;
     font-family: Inter;
-    
+    font-weight: Extra Bold Italic;
     font-size: 94px;
     opacity: 1;
     text-align: left;
@@ -393,7 +237,7 @@ a.as:hover{color:darkorange }
     top: 0px;
     left: 248px;
     font-family: Inter;
-    
+    font-weight: Semi Bold Italic;
     font-size: 96px;
     opacity: 1;
     text-align: left;
@@ -432,7 +276,7 @@ a.as:hover{color:darkorange }
     top: 10px;
     left: 0px;
     font-family: Inter;
-   
+    font-weight: Extra Bold Italic;
     font-size: 64px;
     opacity: 1;
     text-align: left;
@@ -444,7 +288,7 @@ a.as:hover{color:darkorange }
     top: 10px;
     left: 168px;
     font-family: Inter;
-    
+    font-weight: Extra Bold Italic;
     font-size: 64px;
     opacity: 1;
     text-align: left;
@@ -456,19 +300,19 @@ a.as:hover{color:darkorange }
     top: 304px;
     left: 76px;
     font-family: Inter;
-    
+    font-weight: Extra Bold Italic;
     font-size: 49px;
     opacity: 1;
     text-align: left;
 }
 .v3_20 {
-    width: 59%;
-    height: 59%;
-    background: rgba(0,0,0);
+    width: 100%;
+    height: 63%;
+    background: rgba(0,0,0,1);
     opacity: 0.6;
     position: absolute;
-    top: 8%;
-    left: 18%;
+    top: -20%;
+    left: 66%;
     border: 1px solid rgba(255,255,255,1);
     overflow: hidden;
 
@@ -480,7 +324,7 @@ a.as:hover{color:darkorange }
     top: 211px;
     left: 663px;
     font-family: Inter;
-    
+    font-weight: Semi Bold Italic;
     font-size: 48px;
     opacity: 1;
     text-align: left;
@@ -492,12 +336,10 @@ a.as:hover{color:darkorange }
     top: 277px;
     left: 664px;
     font-family: Inter;
-    
+    font-weight: Semi Bold Italic;
     font-size: 32px;
     opacity: 1;
     text-align: left;
 }
-</style></body></html>';
-
-
-?>
+</style></body></html>
+';

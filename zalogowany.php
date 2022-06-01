@@ -5,6 +5,7 @@ $conn = new mysqli("localhost","root","","ksiegarnia") or die ("Odpowiedź: Bł�
 @$user_password = mysqli_real_escape_string($conn, $_POST["user_password"]);
 @$user_email = mysqli_real_escape_string($conn, $_POST["user_name"]);
 
+
 $query = mysqli_query($conn, "SELECT * FROM czytelnik WHERE email like '$user_email'");
 if(mysqli_num_rows($query) > 0) {
   while($row2 = mysqli_fetch_array($query))
@@ -12,13 +13,13 @@ if(mysqli_num_rows($query) > 0) {
     if (password_verify($user_password, $record)) {
        $_SESSION["current_user"] = $row2['imie'];
        $_SESSION["id"] = $row2['id_klient'];
-
+        $_SESSION['a']=True;
     }
    }
 
 
 }
-if (isset($_SESSION["current_user"])){
+if (isset($_SESSION["current_user"]) and $_SESSION['a']){
    echo '<!DOCTYPE html>
 <!-- saved from url=(0035)http://localhost/YURI/register.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link href="./register_files/css" rel="stylesheet">
@@ -388,7 +389,25 @@ a.as:hover{color:darkorange }
     text-align: left;
 }
 </style></body></html>';
-} else {
-echo $_SESSION["current_user"]." Nie Dziala";}
+}
+else {
+    $query = mysqli_query($conn, "SELECT * FROM pracownicy WHERE email like '$user_email'");
+    if (mysqli_num_rows($query) > 0) {
+        while ($row2 = mysqli_fetch_array($query)) {
+            $record = $row2['user_passwordhash'];
+            if (password_verify($user_password, $record)) {
+                $_SESSION["current_user"] = $row2['imie'];
+                $_SESSION["id"] = $row2['id_Pracownika'];
 
+            }
+        }
+    }
+    if (isset($_SESSION["current_user"])) {
+        echo '<script>
+    window.location.replace("admin.php");
+</script>';
+    } else {
+        echo $_SESSION["current_user"] . " Nie Dziala";
+    }
+}
  ?>
