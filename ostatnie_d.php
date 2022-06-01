@@ -121,6 +121,22 @@ echo '
 
             }
         }
+        td{width: 10%;height: 10%;border-style: solid;font-size: 12px;}
+        tr{height: 10%;}
+        table {
+
+    display:block;
+}
+thead {
+    display: inline-block;
+   
+}
+tbody {
+   
+    display: inline-block;
+    
+    overflow: auto;
+}
     </style>
 
 
@@ -135,14 +151,27 @@ echo '
 
 
 
-</div><div class="v2_2"></div><div class="name"></div><div class="v3_12"></div><div class="v3_13"><div class="v2_4"></div><span class="v2_5">Księg</span><span class="v2_7">arnia</span></div><div class="v3_15"></div><span class="v3_19"><div class="v3_20"></div><span class="v3_21">
+</div><div class="v2_2"></div><div class="name"></div><div class="v3_12"></div><div class="v3_13"><div class="v2_4"></div><span class="v2_5">Księg</span><span class="v2_7">arnia</span></div><div class="v3_15"></div><span class="v3_19"><div class="v3_20">
 
-<form action="ostatnie_d.php" method="post" style="width: 60%;height: 10%;position: absolute;top:-50%;left:-50%;">
-<a style="font-size: 15px;width: 120%;">wpisz z ilu ost dni chcesz wypozyczenia</a>
-<input type="number" name="numer" required>
-<input type="submit">
-</form>
-</span></div><style>* {
+';
+$conn = new mysqli("localhost","root","","ksiegarnia") or die ("Odpowiedź: Błąd połączenia z serwerem ");
+$cos=$_POST['numer'];
+$quer=mysqli_query($conn," CALL `procedurka`('$cos')");
+$quera=mysqli_query($conn,"select * from procedura");
+
+echo '
+<table style="border: 0;text-align: center;">
+
+<tr><td style="font-size: 20px;color:darkorange;">ID_ksiazki</td><td style="font-size: 20px;color:darkorange;" >tytul</td><td style="font-size: 20px;color:darkorange;">autor</td><td style="font-size: 20px;color:darkorange;">kategoria</td><td style="font-size: 20px;color:darkorange;">Data wypozyczenia</td><td style="font-size: 20px;color:darkorange;">imie</td><td style="font-size: 20px;color:darkorange;">nazwikso</td></tr>
+';
+while($row1 = mysqli_fetch_array($quera))
+{echo '<tr ><td >'.$row1['id_ksiazki'].'</td><td>'.$row1['tytul'].'</td><td>'.$row1['autor'].'</td><td>'.$row1['kategoria'].'</td><td>'.$row1['data_wypozyczenia'].'</td><td>'.$row1['imie'].'</td><td>'.$row1['nazwisko'].'</td></tr>';
+}
+echo '
+</table>
+</div>
+
+</div><style>* {
     box-sizing: border-box;
     margin:0;
     width: 100%;
@@ -309,13 +338,13 @@ a.as:hover{color:darkorange }
     text-align: left;
 }
 .v3_20 {
-    width: 100%;
+    width: 200%;
     height: 63%;
     background: rgba(0,0,0,1);
     opacity: 0.6;
     position: absolute;
     top: -20%;
-    left: 66%;
+    left: 40%;
     border: 1px solid rgba(255,255,255,1);
     overflow: hidden;
 

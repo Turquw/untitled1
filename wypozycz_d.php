@@ -12,9 +12,9 @@ $data=date('Y-m-d');
         $query = mysqli_query($conn, "SELECT * FROM ksiazka  where tytul like '$subject'");
         $row1 = mysqli_fetch_array($query);
 
-        $idk=$row1['id_ksiazki'];
+            @ $idk=$row1['id_ksiazki'];
 
-        mysqli_query($conn, "INSERT INTO `wypozyczone_i_w_trakcie`(`stan`, `id_ksiazki`, `id_czytelnika`) VALUES (1,$idk,$klient)");}}
+       @ mysqli_query($conn, "INSERT INTO `wypozyczone_i_w_trakcie`(`stan`, `id_ksiazki`, `id_czytelnika`) VALUES (1,$idk,$klient)");}}
         echo '<script>
 alert ("podejdz do punktu i odbierz ksiazki");
 window.location.replace("wypozycz.php");
